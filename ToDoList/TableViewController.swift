@@ -10,7 +10,7 @@ import UIKit
 
 class TableViewController: UITableViewController {
 
-    let itemArray = ["Find Eggs", "Buy Eggs", "Destroy Eggs"]
+    var itemArray = ["Find Eggs", "Buy Eggs", "Destroy Eggs"]
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -45,5 +45,30 @@ class TableViewController: UITableViewController {
         }
         
     }
+    
+    //MARK-- Add New Items
+    
+    @IBAction func barButtonpressed(_ sender: UIBarButtonItem) {
+        var textField = UITextField()
+        let alert = UIAlertController(title: "Add New Items in To Do List", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            //what will happen when user clicks add item on UIalert
+            
+            self.itemArray.append(textField.text!)
+            self.tableView.reloadData()
+        }
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Create new item"
+            textField = alertTextField
+            
+            
+        }
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
+    
 }
 
